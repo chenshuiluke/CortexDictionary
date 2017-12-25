@@ -1,5 +1,5 @@
 <StackLayout>
-    <SearchBar hint="Search for word" (clear)="clearBox()" [text]="searchPhrase" (textChange)="searchForTerm($event)" (submit)="onSubmit($event)" 
+    <SearchBar hint="Search for word" (clear)="clearBox()" [text]="searchPhrase" (textChange)="registerKeyPress($event)" (submit)="onSubmit($event)" 
     ></SearchBar>
     <ListView  [items]="words" class="list-group">
         <ng-template let-item="item">
