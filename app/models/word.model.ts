@@ -23,6 +23,7 @@ export class Word{
                     .then((result:Definition[]) => {
                         console.log(result);
                         console.log("Got definitions");
+                        this.definition = result;
                     })
                     .catch((err) => {
                         console.log(err);

@@ -128,13 +128,6 @@ export class SearchService{
                             }
                         }
                         resolve(definitions);
-                        // let words:Word[] = data.results.map((item) => {
-                        //     return new OxfordResponse(item);
-                        // })
-                        // .map((item:OxfordResponse) => {
-                        //     return new Word(item);
-                        // })
-                        // resolve(words);
                     },
                     (err) => {
                         reject(err);

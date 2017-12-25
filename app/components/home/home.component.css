@@ -5,3 +5,8 @@ Image{
     width:100px;
     height:100px;
 }
+
+ActivityIndicator{
+    color: white;
+    background-color: inherit;
+}

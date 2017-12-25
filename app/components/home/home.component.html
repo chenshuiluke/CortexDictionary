@@ -1,13 +1,15 @@
 <StackLayout>
     <SearchBar hint="Search for word" (clear)="clearBox()" [text]="searchPhrase" (textChange)="registerKeyPress($event)" (submit)="onSubmit($event)" 
     ></SearchBar>
-    <ListView  [items]="words" class="list-group">
-        <ng-template let-item="item">
-            <GridLayout rows="auto" columns="*, 100"class="item list-group-item">
-                <Label row="0" col="0" [text]="item.word" class="list-group-item-heading"></Label>
-                <Image row="0" col="1" stretch="aspectFill" *ngIf="item.source === 'oxford'" src="res://oxford" ></Image>
-                <Image row="0" col="1" stretch="aspectFill" *ngIf="item.source === 'urban'" src="res://ub" ></Image>
+    <ActivityIndicator busy="true" *ngIf="loading" width="100" height="100" class="activity-indicator"></ActivityIndicator>
+    <ListView  [items]="state.getWords()" class="list-group">
+        <ng-template let-word="item">
+            <GridLayout rows="auto" columns="*, 100"class="item list-group-item" (tap)="showDefinition(word)">
+                <Label row="0" col="0" [text]="word.word" class="list-group-item-heading"></Label>
+                <Image row="0" col="1" stretch="aspectFill" *ngIf="word.source === 'oxford'" src="res://oxford" ></Image>
+                <Image row="0" col="1" stretch="aspectFill" *ngIf="word.source === 'urban'" src="res://ub" ></Image>
             </GridLayout>
         </ng-template>
     </ListView>
+    
 </StackLayout>

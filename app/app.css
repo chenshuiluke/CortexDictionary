@@ -10,3 +10,17 @@ of writing your own CSS rules. For a full list of class names in the theme
 refer to http://docs.nativescript.org/ui/theme.
 */
 @import 'nativescript-theme-core/css/core.light.css';
+
+
+StackLayout{
+    background-color: #408AF8;
+    padding: 10px;
+}
+StackLayout > *{
+    background-color: white;
+    color: #6772E5;
+}
+
+*{
+    font-family:"Aleo";
+}

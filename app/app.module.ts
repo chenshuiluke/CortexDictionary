@@ -5,14 +5,13 @@ import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
 
 import { HomeComponent } from "./components/home/home.component";
-
+import { DefinitionComponent } from "./components/definition/definition.component";
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
 import { NativeScriptHttpModule } from "nativescript-angular/http";
-
-import { SearchService } from "./services";
+import { SearchService, StateService } from "./services";
 
 @NgModule({
     bootstrap: [
@@ -26,10 +25,12 @@ import { SearchService } from "./services";
     ],
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        DefinitionComponent
     ],
     providers: [
-        SearchService
+        SearchService,
+        StateService
     ],
     schemas: [
         NO_ERRORS_SCHEMA
