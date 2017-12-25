@@ -3,8 +3,10 @@
     ></SearchBar>
     <ListView  [items]="words" class="list-group">
         <ng-template let-item="item">
-            <GridLayout class="item list-group-item">
-                <Label [text]="item.word" class="list-group-item-heading"></Label>
+            <GridLayout rows="auto" columns="*, 100"class="item list-group-item">
+                <Label row="0" col="0" [text]="item.word" class="list-group-item-heading"></Label>
+                <Image row="0" col="1" stretch="aspectFill" *ngIf="item.source === 'oxford'" src="res://oxford" ></Image>
+                <Image row="0" col="1" stretch="aspectFill" *ngIf="item.source === 'urban'" src="res://ub" ></Image>
             </GridLayout>
         </ng-template>
     </ListView>
