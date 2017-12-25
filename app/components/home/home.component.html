@@ -1,0 +1,11 @@
+<StackLayout>
+    <SearchBar hint="Search for word" (clear)="clearBox()" [text]="searchPhrase" (textChange)="searchForTerm($event)" (submit)="onSubmit($event)" 
+    ></SearchBar>
+    <ListView  [items]="words" class="list-group">
+        <ng-template let-item="item">
+            <GridLayout class="item list-group-item">
+                <Label [text]="item.word" class="list-group-item-heading"></Label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+</StackLayout>
