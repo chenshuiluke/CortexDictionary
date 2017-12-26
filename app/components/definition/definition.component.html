@@ -1,5 +1,5 @@
 <StackLayout>
-    <GridLayout cols="auto" rows="auto, *">
+    <GridLayout cols="auto" rows="auto, *, {{images && images.length > 0 ? '100' : '0'}}">
         <Label row="0" col="0" class="h3 heading" text="{{state.getSelectedWord().word}}"></Label>
         <ListView row="1" col="0" [items]="state.getSelectedWord().definition" class="list-group">
             <ng-template let-definition="item">
@@ -9,7 +9,9 @@
                 </GridLayout>
             </ng-template>
         </ListView>
+        <Image [col]="0" row="2" stretch="aspectFit" *ngIf="images && images.length > 0" src="{{getRandomImage().url}}" class="word-image"></Image>
     </GridLayout>
-
+    
+    
 
 </StackLayout>

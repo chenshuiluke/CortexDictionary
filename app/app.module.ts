@@ -11,8 +11,9 @@ import { DefinitionComponent } from "./components/definition/definition.componen
 
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
 import { NativeScriptHttpModule } from "nativescript-angular/http";
-import { SearchService, StateService } from "./services";
+import { SearchService, StateService, ImagesService } from "./services";
 
+import { SlidesModule } from 'nativescript-ngx-slides';
 @NgModule({
     bootstrap: [
         AppComponent
@@ -21,7 +22,8 @@ import { SearchService, StateService } from "./services";
         NativeScriptModule,
         AppRoutingModule,
         NativeScriptHttpModule,
-        NativeScriptHttpClientModule
+        NativeScriptHttpClientModule,
+        SlidesModule
     ],
     declarations: [
         AppComponent,
@@ -30,7 +32,8 @@ import { SearchService, StateService } from "./services";
     ],
     providers: [
         SearchService,
-        StateService
+        StateService,
+        ImagesService
     ],
     schemas: [
         NO_ERRORS_SCHEMA
