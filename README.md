@@ -1,4 +1,6 @@
-#Running
+[![Get it on Google Play](https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=org.nativescript.CortexDictionary)
+
+# Running
 
 After you install the nativescript CLI and all other basic requirements, like the Android Sdk, you'll need to configure your environment variables.
 
