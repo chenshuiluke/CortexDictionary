@@ -1,3 +1,6 @@
+bfg.jar
+..bfg*
+.gitsecret
 # Created by https://www.gitignore.io/api/nativescript
 
 ### NativeScript ###
