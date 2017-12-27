@@ -1,5 +1,5 @@
 <StackLayout>
-    <SearchBar hint="Search for word" (clear)="clearBox()" [text]="searchPhrase" (textChange)="registerKeyPress($event)" (submit)="onSubmit($event)" 
+    <SearchBar hint="Search for word" (clear)="clearBox()" (textChange)="registerKeyPress($event)" (submit)="onSubmit($event)" 
     ></SearchBar>
     <ActivityIndicator busy="true" *ngIf="loading" width="100" height="100" class="activity-indicator"></ActivityIndicator>
     <ListView  [items]="state.getWords()" class="list-group">

@@ -4,8 +4,8 @@ import { Page } from "ui/page";
 import { Image } from '../../models/image.model';
 @Component({
     selector:'definition',
-    templateUrl: 'components/definition/definition.component.html',
-    styleUrls: ['components/definition/definition.component.css']
+    templateUrl: './definition.component.html',
+    styleUrls: ['./definition.component.css']
 })
 export class DefinitionComponent implements OnInit{
     images:Image[];

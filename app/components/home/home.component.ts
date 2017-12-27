@@ -11,8 +11,8 @@ import { Router } from "@angular/router";
 import { Page } from "ui/page";
 @Component({
     selector:'home',
-    styleUrls:['components/home/home.component.css'],
-    templateUrl: 'components/home/home.component.html'
+    styleUrls:['./home.component.css'],
+    templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit{
     loading:boolean = false;
