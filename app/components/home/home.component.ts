@@ -16,6 +16,7 @@ import { Page } from "ui/page";
 })
 export class HomeComponent implements OnInit{
     loading:boolean = false;
+    
     userSearched: Subject<string> = new Subject<string>();
     constructor(private search:SearchService, public state:StateService, 
         private router:Router,  private _page: Page){

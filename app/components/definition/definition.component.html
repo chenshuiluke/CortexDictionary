@@ -1,7 +1,8 @@
 <StackLayout>
-    <GridLayout cols="auto" rows="auto, *, {{images && images.length > 0 ? '100' : '0'}}">
+    <GridLayout cols="auto" rows="auto, 100, *, {{images && images.length > 0 ? '100' : '0'}}">
         <Label row="0" col="0" class="h3 heading" text="{{state.getSelectedWord().word}}"></Label>
-        <ListView row="1" col="0" [items]="state.getSelectedWord().definition" class="list-group">
+        <Label row="1" col="0" class="fa" text="{{code}}"></Label>
+        <ListView row="2" col="0" [items]="state.getSelectedWord().definition" class="list-group">
             <ng-template let-definition="item">
                 <GridLayout rows="auto, auto" class="list-group-item">
                     <Label row="0" col="0" *ngIf="definition.category" class="list-group-item-heading" text="{{definition.category}}"></Label>
@@ -9,7 +10,7 @@
                 </GridLayout>
             </ng-template>
         </ListView>
-        <ImageSwipe [items]="images" [col]="0" row="2" imageUrlProperty="url" backgroundColor="#FFFFFF">
+        <ImageSwipe [items]="images" [col]="0" row="3" imageUrlProperty="url" backgroundColor="#FFFFFF">
         </ImageSwipe>
     </GridLayout>
 

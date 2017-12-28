@@ -9,6 +9,7 @@ import { Image } from '../../models/image.model';
 })
 export class DefinitionComponent implements OnInit{
     images:Image[];
+    code:String = String.fromCharCode(0xf028);
     constructor(public state:StateService, private _page: Page, private imagesService:ImagesService){
 
     }
