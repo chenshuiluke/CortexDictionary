@@ -9,6 +9,7 @@ export class Word{
     word:String;
     definition:String|Definition[];
     source:String;
+    id:String;
     constructor(obj:OxfordResponse|UrbanDictionaryResponse, private search?:SearchService){
         if(obj.word){
             this.word = obj.word;
@@ -16,10 +17,14 @@ export class Word{
         if(obj.definition){
             this.definition = obj.definition;
         }
+        if(obj.id !== undefined ){
+            this.id = obj.id;
+        }
         if(obj instanceof OxfordResponse){
             this.source = "oxford";
             if(this.search && !this.definition){
-                this.search.getOxfordDefinition(this.word)
+                let query:String = this.id ? this.id : this.word;
+                this.search.getOxfordDefinition(query)
                     .then((result:Definition[]) => {
                         console.log(result);
                         console.log("Got definitions");

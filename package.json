@@ -22,6 +22,7 @@
     "@angular/router": "^5.1.2",
     "image-search-google": "^1.0.7",
     "nativescript-angular": "^5.0.0",
+    "nativescript-image-swipe": "^2.1.0",
     "nativescript-ngx-slides": "^0.4.5",
     "nativescript-theme-core": "~1.0.2",
     "reflect-metadata": "~0.1.8",

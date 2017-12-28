@@ -3,15 +3,16 @@
         <Label row="0" col="0" class="h3 heading" text="{{state.getSelectedWord().word}}"></Label>
         <ListView row="1" col="0" [items]="state.getSelectedWord().definition" class="list-group">
             <ng-template let-definition="item">
-                <GridLayout rows="auto, auto"  class="list-group-item">
+                <GridLayout rows="auto, auto" class="list-group-item">
                     <Label row="0" col="0" *ngIf="definition.category" class="list-group-item-heading" text="{{definition.category}}"></Label>
                     <Label row="1" col="0" class="list-group-item-text" textWrap="true" text="{{definition.definition}}"></Label>
                 </GridLayout>
             </ng-template>
         </ListView>
-        <Image [col]="0" row="2" stretch="aspectFit" *ngIf="images && images.length > 0" src="{{getRandomImage().url}}" class="word-image"></Image>
+        <ImageSwipe [items]="images" [col]="0" row="2" imageUrlProperty="url" backgroundColor="#FFFFFF">
+        </ImageSwipe>
     </GridLayout>
-    
-    
+
+
 
 </StackLayout>

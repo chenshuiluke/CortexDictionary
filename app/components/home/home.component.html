@@ -2,7 +2,7 @@
     <SearchBar hint="Search for word" (clear)="clearBox()" (textChange)="registerKeyPress($event)" (submit)="onSubmit($event)" 
     ></SearchBar>
     <ActivityIndicator busy="true" *ngIf="loading" width="100" height="100" class="activity-indicator"></ActivityIndicator>
-    <ListView  [items]="state.getWords()" class="list-group">
+    <ListView  [items]="getWords()" class="list-group">
         <ng-template let-word="item">
             <GridLayout rows="auto" columns="*, 100"class="item list-group-item" (tap)="showDefinition(word)">
                 <Label row="0" col="0" [text]="word.word" class="list-group-item-heading"></Label>
@@ -11,5 +11,4 @@
             </GridLayout>
         </ng-template>
     </ListView>
-    
 </StackLayout>

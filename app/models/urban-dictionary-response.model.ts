@@ -1,7 +1,7 @@
 export class UrbanDictionaryResponse{
     word:String;
     definition:String;
-
+    id:String;
     constructor(obj:any){
         if(obj.word){
             this.word = obj.word;

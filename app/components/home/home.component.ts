@@ -49,6 +49,22 @@ export class HomeComponent implements OnInit{
         this.clearBox();
     }
 
+    getWords(){
+        let filteredWords:Word[] = [];
+        
+        let words = this.state.getWords();
+        if(words != undefined){
+            for(let counter = 0; counter < words.length; counter++){
+                let word:Word = words[counter];
+                if(word.definition && word.definition.length > 0){
+                    filteredWords.push(word);
+                }
+            }
+        }
+        
+        return filteredWords;
+    }
+
     showDefinition(word:Word){
         this.state.setSelectedWord(word);
         this.router.navigate(['definition']);

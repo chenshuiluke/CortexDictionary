@@ -8,6 +8,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const { NativeScriptWorkerPlugin } = require("nativescript-worker-loader/NativeScriptWorkerPlugin");
 
+var imageSwipeMangleExcludes = require("nativescript-image-swipe/uglify-mangle-excludes").default;
+
 module.exports = env => {
     const platform = env && (env.android && "android" || env.ios && "ios");
     if (!platform) {
@@ -140,9 +142,11 @@ module.exports = env => {
         // Work around an Android issue by setting compress = false
         const compress = platform !== "android";
         config.plugins.push(new webpack.optimize.UglifyJsPlugin({
-            mangle: { except: nsWebpack.uglifyMangleExcludes },
+            mangle: { except: nsWebpack.uglifyMangleExcludes.concat(imageSwipeMangleExcludes) },
             compress,
         }));
     }
+
+    
     return config;
 };
