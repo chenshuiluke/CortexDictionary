@@ -4,10 +4,9 @@
     <ActivityIndicator busy="true" *ngIf="loading" width="100" height="100" class="activity-indicator"></ActivityIndicator>
     <ListView  [items]="getWords()" class="list-group">
         <ng-template let-word="item">
-            <GridLayout rows="auto" columns="*, 100"class="item list-group-item" (tap)="showDefinition(word)">
+            <GridLayout rows="auto" columns="*" class="item list-group-item" (tap)="showDefinition(word)">
                 <Label row="0" col="0" [text]="word.word" class="list-group-item-heading"></Label>
-                <Image row="0" col="1" stretch="aspectFill" *ngIf="word.source === 'oxford'" src="res://oxford" ></Image>
-                <Image row="0" col="1" stretch="aspectFill" *ngIf="word.source === 'urban'" src="res://ub" ></Image>
+                
             </GridLayout>
         </ng-template>
     </ListView>

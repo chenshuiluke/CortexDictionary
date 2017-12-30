@@ -10,14 +10,21 @@ To do so, just create two files `app/environment/environment.prod.ts` and `app/e
 
 	export const environment = {
 	    oxford_api:{
-		base_url: "https://od-api.oxforddictionaries.com/api/v1",
-		app_id: "<app_id>",
-		app_key: "<app_key>"
+			base_url: "https://od-api.oxforddictionaries.com/api/v1",
+			app_id: "<app_id>",
+			app_key: "<app_key>"
 	    },
 	    urban_dict_api:{
-		base_url: "http://api.urbandictionary.com/v0/define"
+			base_url: "http://api.urbandictionary.com/v0/define"
 	    },
-	    prod: false
+		word_api:{
+			base_url: "https://wordsapiv1.p.mashape.com/words",
+			app_id: "cortexdictionary_5a47e0a0e4b03dc727eee34d",
+			app_key: "qjesu1R7WNmshQmu2eq4OPlN9QdSp14YSaUjsnO44eG5ARVbkr"
+    	},
+		prod: true
+		//Change this to false when not bundling with webpack
+		//Change to true when bundling with webpack
 	}
 
 Of course, you need to replace <app_id> and <app_key> with your own app id and key for the Oxford API.

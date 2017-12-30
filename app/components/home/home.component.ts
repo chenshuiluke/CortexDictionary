@@ -9,10 +9,11 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import { StateService } from '../../services';
 import { Router } from "@angular/router";
 import { Page } from "ui/page";
+
 @Component({
     selector:'home',
-    styleUrls:['./home.component.css'],
-    templateUrl: './home.component.html'
+    styleUrls:[`${environment.prod ? './home.component.css' : 'components/home/home.component.css'}`],
+    templateUrl: `${environment.prod ? './home.component.html' : 'components/home/home.component.html'}`
 })
 export class HomeComponent implements OnInit{
     loading:boolean = false;

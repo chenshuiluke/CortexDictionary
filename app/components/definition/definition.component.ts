@@ -2,10 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { StateService, ImagesService } from '../../services';
 import { Page } from "ui/page";
 import { Image } from '../../models/image.model';
+import { environment } from '../../environment/environment';
 @Component({
     selector:'definition',
-    templateUrl: './definition.component.html',
-    styleUrls: ['./definition.component.css']
+    styleUrls:[`${environment.prod ? './definition.component.css' : 'components/definition/definition.component.css'}`],
+    templateUrl: `${environment.prod ? './definition.component.html' : 'components/definition/definition.component.html'}`
 })
 export class DefinitionComponent implements OnInit{
     images:Image[];

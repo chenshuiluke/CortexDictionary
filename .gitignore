@@ -1,3 +1,4 @@
+.tmp_backup*
 app/environment/*.ts
 bfg.jar
 ..bfg*

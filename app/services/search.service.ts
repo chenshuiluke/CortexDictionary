@@ -1,38 +1,41 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../environment/environment";
-import { Word, OxfordResponse, UrbanDictionaryResponse, Definition } from '../models';
+import { Word, Definition } from '../models';
 @Injectable()
 export class SearchService{
     constructor(private http:HttpClient){
 
     }
 
-    searchForWordOnOxford(word:String){
+    searchForWordOnWordApi(word:String){
         return new Promise((resolve, reject) => {
             let headers:HttpHeaders = new HttpHeaders();
-            headers = headers.set("app_id", environment.oxford_api.app_id);
-            headers = headers.set("app_key", environment.oxford_api.app_key);
-            this.http.get(`${environment.oxford_api.base_url}/search/en?q=${word.toLowerCase()}`, 
-                {
-                    headers: headers
-                })
+            headers = headers.set("X-Mashape-Key", environment.word_api.app_key);
+            this.http.get(`${environment.word_api.base_url}/${word}/definitions`, {
+                headers:headers
+            })
                 .subscribe(
                     (data:any) => {
-                        console.log(data.results);
-                        let words:Word[] = data.results.slice(0,3).map((item) => {
-                            return new OxfordResponse(item);
-                        })
-                        .map((item:OxfordResponse) => {
-                            return new Word(item, this);
-                        })
-                        resolve(words);
+                        console.log(data);
+                        
+                        let definitions:Definition[] = [];
+                        for(let counter = 0; counter < data.definitions.length; counter++){
+                            let item = data.definitions[counter];
+                            let definition:Definition = new Definition({category:item.partOfSpeech, definition:item.definition});
+                            definitions.push(definition);
+                        }
+
+                        let word_obj:Word = new Word({word:word, definition:definitions});
+                        word_obj.source = "word_api";
+                        resolve([word_obj]);
                     },
-                    (err) => {
-                        reject(err);
+                    (err:any) => {
+                        //API returns an error when the word is not found - we don't want to catch this.
+                        resolve([]);
                     }
                 )
-        })
+        });
     }
 
     searchForWordOnUrbanDictionary(word:String){
@@ -42,7 +45,7 @@ export class SearchService{
                     (data:any) => {
                         console.log(data);
                         if(data.result_type === "exact"){
-                            let word = new Word(new UrbanDictionaryResponse(data.list[0]));
+                            let word = new Word(data.list[0]);
                             let definitions:Definition[] = [];
 
                             data.list = data.list.sort((a, b) => {
@@ -56,6 +59,7 @@ export class SearchService{
                                 definitions.push(new Definition({definition:item.definition}));
                             }
                             word.definition = definitions;
+                            word.source = "urban";
                             console.log("Got urban dictionary");
                             resolve([word]);
                         }
@@ -73,66 +77,52 @@ export class SearchService{
     }
 
     searchForWord(word:String){
+        word = word.replace(/\s+$/, '');
         return new Promise((resolve, reject) => {
             Promise.all([
                 this.searchForWordOnUrbanDictionary(word),
-                this.searchForWordOnOxford(word)
+                this.searchForWordOnWordApi(word)
             ])
             .then((data:any) => {
-                console.log("Result:");
+                
                 let arr1 = data[0];
                 let arr2 = data[1];
-                let result = arr1.concat(arr2);
+
+                let combined_arr:Word[] = [];
+
+                let larger_arr = arr1.length >= arr2.length ? arr1 : arr2;
+                let smaller_arr = arr1.length <= arr2.length ? arr1 : arr2;
+
+                for(let larger_counter = 0; larger_counter < larger_arr.length; larger_counter++){
+                    let larger_arr_word = larger_arr[larger_counter];
+
+                    for(let smaller_counter = 0; smaller_counter < smaller_arr.length; smaller_counter++){
+                        let smaller_arr_word = smaller_arr[smaller_counter];
+                        if(larger_arr_word.word === smaller_arr_word.word){
+                            let combined_definitions:Definition[] = [];
+                            
+                            larger_arr_word.definition = larger_arr_word.definition.concat(smaller_arr_word.definition);
+                            larger_arr_word.definition.filter((item, index, arr) => {
+                                return index === arr.findIndex((t:Definition) => {
+                                    t.definition === item.definition;
+                                });
+                            })
+                        }
+                    }
+                    combined_arr.push(larger_arr_word);
+                }
+
+                combined_arr
+
                 console.log("Combined result:");
-                console.log(result);
-                resolve(result)
+                console.log(combined_arr);
+                resolve(combined_arr)
             })
             .catch((err) => {
                 console.log("All promise error");
                 console.log(err);
                 reject(err);
             })
-        })
-    }
-
-    getOxfordDefinition(word:String){
-        return new Promise((resolve, reject) => {
-            let headers:HttpHeaders = new HttpHeaders();
-            headers = headers.set("app_id", environment.oxford_api.app_id);
-            headers = headers.set("app_key", environment.oxford_api.app_key);
-            this.http.get(`${environment.oxford_api.base_url}/entries/en/${word.toLowerCase()}`, 
-                {
-                    headers: headers
-                })
-                .subscribe(
-                    (data:any) => {
-                        console.log(data);
-                        let definitions:Definition[] = [];
-                        if(data.results && data.results.length > 0){
-                            let result_item = data.results[0];
-                            for(let lexical_entry_counter = 0; lexical_entry_counter < result_item.lexicalEntries.length; lexical_entry_counter++){
-                                let lexical_entry = result_item.lexicalEntries[lexical_entry_counter];
-                                for( let entry_counter = 0; entry_counter < lexical_entry.entries.length; entry_counter++){
-                                    let entry = lexical_entry.entries[entry_counter];
-                                    for(let senses_counter = 0; senses_counter < entry.senses.length; senses_counter++){
-                                        let sense = entry.senses[senses_counter];
-                                        sense.definitions.map((item) => {
-                                            definitions.push(new Definition({
-                                                category: lexical_entry.lexicalCategory, 
-                                                definition: item
-                                            }));
-                                            return item;
-                                        })
-                                    }
-                                }
-                            }
-                        }
-                        resolve(definitions);
-                    },
-                    (err) => {
-                        reject(err);
-                    }
-                )
         })
     }
 }

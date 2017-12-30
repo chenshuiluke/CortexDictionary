@@ -21,13 +21,14 @@
     "@angular/platform-server": "^5.1.2",
     "@angular/router": "^5.1.2",
     "image-search-google": "^1.0.7",
+    "nativescript": "^3.4.0",
     "nativescript-angular": "^5.0.0",
     "nativescript-image-swipe": "^2.1.0",
     "nativescript-ngx-slides": "^0.4.5",
+    "nativescript-texttospeech": "^2.0.2",
     "nativescript-theme-core": "~1.0.2",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^5.5.6",
-    "tns-core-modules": "^3.4.0",
     "zone.js": "~0.8.2"
   },
   "devDependencies": {
@@ -48,6 +49,7 @@
     "typescript": "2.4.2",
     "webpack": "~3.8.1",
     "webpack-bundle-analyzer": "^2.8.2",
-    "webpack-sources": "~1.0.1"
+    "webpack-sources": "~1.0.1",
+    "tns-core-modules": "^3.4.0"
   }
 }
